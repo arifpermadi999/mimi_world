@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Belajar Cuk</title>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <script type="text/javascript" src="src/jquery.js"></script>
+
+        <script type="text/javascript" src="src/minified/plugins/DrawSVGPlugin.min.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    
+        <script type="text/javascript" src="src/minified/TweenMax.min.js"></script>
+        <style type="text/css">
+  #canvas{
+    width: 80%;
+    margin-left: 10%;
+  
+    padding-top: 15%;
+    position: absolute;
+    z-index: 2;
+  }
+
+  #canvas_cloud{
+    width: 100%;
+    height: 400px;
+    position: absolute;
+    z-index: 4;
+    overflow: hidden;
+  }
+  #canvas_nav{
+    width: 100%;
+    height: 200px;
+    margin-top: 600px;
+    position: absolute;
+    z-index: 3;
+    overflow: hidden;
+  }
+  #canvas_cloud .cloud{
+    height: 400px;
+    width: 400px;
+    z-index: 0;
+    margin-top: 100px;
+    position: absolute; 
+  }
+  #canvas_cloud .cloud.cloud1{
+    left: 18%;
+    margin-top: 30px;
+  }
+  #canvas_cloud .cloud.cloud2{
+    left: 25%;
+  }
+  #canvas_cloud .cloud.cloud3{
+    left: 45%;
+    margin-top: 30px;
+  }
+  #canvas_cloud .cloud.cloud4{
+    left: 40%;
+  }
+  #canvas_nav i{
+    font-size: 200px;
+    color: grey;
+  }
+  #canvas_nav i#nav_right{
+    right: 0;
+    position: absolute;
+  }
+  #canvas_nav i#nav_left{
+    left: 0;
+    position: absolute;
+  }
+  #nav{
+    margin-left: 100px;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    z-index: 3;
+    
+  }
+
+  #content{
+    margin-left: 15%;
+    width: 70%;
+    height: 400px;
+    text-align: center;
+    position: absolute;
+    color: black;
+    z-index: 3;
+    
+  }
+  #canvas #planet{
+  
+    width: 100%;
+    height: 100%;
+    padding-top: 220px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+  img{
+      width: 100%;
+      position: relative;
+
+  }
+  #image_welcome{
+    width: 60%;
+    margin-top: 50px;
+  }
+  .title_wood{
+    width: 300px;
+    height: 150px;
+    margin-top: -20px;
+    margin: -20px auto;
+    background: url('img/title.png');
+    background-size: 100%;
+    padding-top: 80px;
+  }
+  .title_wood h1{
+    font-size: 20px;
+    font-weight: bold;
+
+  }
+  .border_gallery{
+    margin-top: 100px;
+    width: 150px;
+    position: absolute;
+    height: 200px;
+    background: url('img/border_gallery.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .border_gallery.gallery1{
+    left: 0;
+    -ms-transform: rotate(-20deg); /* IE 9 */
+    transform: rotate(-20deg);
+  }
+
+  .border_gallery.gallery2{
+
+      margin-top: 50px;
+      left: 40%;
+  }
+  .border_gallery.gallery3{
+    -ms-transform: rotate(20deg); /* IE 9 */
+    transform: rotate(20deg);
+    right: 0;
+  }
+  .border_gallery img{
+    height: 90%;
+    margin-top: 5%;
+    width: 90%;
+  }
+</style>
+</head>       
+<body style="background:url('img/bg_body.jpg');background-size: cover;">
+  <div id="canvas_cloud">
+      <div class="cloud cloud1"><img src="img/cloud_left.png"></div>
+      <div class="cloud cloud2"><img src="img/cloud_left.png"></div>
+      <div class="cloud cloud3"><img src="img/cloud_right.png"></div>  
+      <div class="cloud cloud4"><img src="img/cloud_right.png"></div>  
+  </div>
+
+  <div id="canvas_nav">
+    <i class="fa fa-angle-left" id="nav_left" ></i>
+    <i class="fa fa-angle-right" id="nav_right"></i>
+  </div>
+
+  <div id="content">
+      <div id="section1">
+        <img src="img/welcome.png" id="image_welcome">
+      </div>
+      <div id="section2">
+        <div class="title_wood">
+          <h1>MY GALLERY</h1>
+        </div>
+        <div class="border_gallery gallery1"><img src="img/gallery/1.png" /><h3>GITARIS</h3></div>
+        <div class="border_gallery gallery2"><img src="img/gallery/2.png" /><h3>PECINTA KORENGAN</h3></div>
+        <div class="border_gallery gallery3"><img src="img/gallery/3.png" /><h3>CARARENTIL</h3></div>
+      </div>
+      <div id="section3">
+        <img src="img/welcome.png" id="image_welcome">
+      </div>
+      <div id="section4">
+        <img src="img/welcome.png" id="image_welcome">
+      </div>
+  </div>
+  <div id="canvas">
+    <div id="planet">
+          <img id="img_planet" src="img/planet_mimi.png">
+    </div>
+  </div>  
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+      TweenLite.to($(".cloud1"),20,{x:-800});
+      TweenLite.to($(".cloud2"),20,{x:-800});
+      TweenLite.to($(".cloud3"),20,{x:800});
+      TweenLite.to($(".cloud4"),20,{x:800});
+
+
+      $("#section2").hide();
+      $("#section3").hide();
+      $("#section4").hide();
+
+      var tl=new TimelineLite();
+      var rot=0;
+      var klik=1;
+      var number_inc = 1;
+      var klik_deactived=function(){
+          klik=1;
+      }
+
+      var section_show=function(){
+        if(number_inc > 4){
+          number_inc = 1;
+        }else if(number_inc < 1){
+          number_inc = 4;
+        }
+        $("#section" + number_inc).show();
+        TweenLite.from($("#section" + number_inc),0.5,{y:800,alpha:0,scale:0});
+      }
+      $("#nav_right").click(function(){
+        if (klik==1){
+
+          $("#section" + number_inc).hide();
+          number_inc+=1;
+          
+          rot+=90;
+          klik=0;
+          if(rot>360){
+            rot=90;
+            tl.fromTo($("#img_planet"),1,{rotation:0},{rotation:rot,ease:Back.easeOut,delay:0.3,onStart:section_show,onComplete:klik_deactived}) 
+          }
+          else{
+            if(rot==180){  
+              tl.to($("#img_planet"),1,{rotation:rot,ease:Back.easeOut,delay:0.3,onStart:section_show,onComplete:klik_deactived})
+            }
+            else{
+              tl.to($("#img_planet"),1,{rotation:rot,ease:Back.easeOut,delay:0.3,onStart:section_show,onComplete:klik_deactived})
+            }
+          }
+        }
+      })
+
+      $("#nav_left").click(function(){
+        if (klik==1){
+          
+          $("#section" + number_inc).hide();
+          number_inc-=1;
+
+          rot-=90;
+          klik=0;
+          if(rot>360){
+            rot=90;
+            tl.fromTo($("#img_planet"),1,{rotation:0},{rotation:rot,ease:Back.easeOut,delay:0.3,onStart:section_show,onComplete:klik_deactived}) 
+          }
+          else{
+            if(rot==180){  
+              tl.to($("#img_planet"),1,{rotation:rot,ease:Back.easeOut,delay:0.3,onStart:section_show,onComplete:klik_deactived})
+            }
+            else{
+              tl.to($("#img_planet"),1,{rotation:rot,ease:Back.easeOut,delay:0.3,onStart:section_show,onComplete:klik_deactived})
+            }
+          }
+        }
+      })
+
+  });
+</script>
+</body>
+</html>

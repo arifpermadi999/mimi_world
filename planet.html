@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Belajar Cuk</title>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <script type="text/javascript" src="src/jquery.js"></script>
+
+        <script type="text/javascript" src="src/minified/plugins/DrawSVGPlugin.min.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    
+        <script type="text/javascript" src="src/minified/TweenMax.min.js"></script>
+                
+<style type="text/css">
+  #canvas{
+    width: 80%;
+    margin-left: 10%;
+  
+    padding-top: 15%;
+    position: absolute;
+    z-index: 2;
+  }
+  #nav{
+    margin-left: 100px;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    z-index: 3;
+    
+  }
+
+  .teks_nav{
+    margin-left: 15%;
+    width: 70%;
+    height: 100px;
+    margin-top: 100px;
+    font-family: sans-serif;
+    font-size: 30px;
+    text-align: center;
+    position: absolute;
+    color: black;
+    z-index: 4;
+    
+  }
+  #canvas_cloud{
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
+  }
+  #canvas_cloud .kotak_cloud{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    z-index: 0;
+  }
+
+   #canvas_cloud .kotak_cloud4{
+    height: 200px;
+    width: 200px;
+    margin-top: 10px;
+    position: absolute;
+    z-index: 0;
+  }
+   #canvas_cloud .kotak_cloud5{
+    height: 200px;
+    width: 200px;
+    margin-top: 20px;
+    position: absolute;
+    z-index: 0;
+  }
+  /*kanan*/
+  #canvas_cloud .kotak_cloud2{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    z-index: 0;
+    margin-top: 30px;
+    margin-left: 100%;
+  }
+  #canvas_cloud .kotak_cloud3{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    z-index: 0;
+    margin-top: 50px;
+    margin-left: 100%;
+  }
+
+  #canvas_cloud .kotak_cloud6{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    z-index: 0;
+    margin-top: 80px;
+    margin-left: 100%;
+  }
+  #canvas #planet{
+  
+    width: 100%;
+    height: 100%;
+    padding-top: 60px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+  img{
+      
+      width: 100%;
+      position: relative;
+
+  }
+</style>
+    </head>
+    <body>
+        
+
+        <div class="teks_nav">
+              Wellcome in mimi world :)
+        </div>
+        <div class="teks_nav">
+              We Are Gear Logic
+        </div>
+        <div id="nav">
+          <button class="btn btn-primary" id="next">Next</button>
+        </div>
+            
+
+        <script type="text/javascript">
+         var height = $(window).height();
+         var padding_top=$(window).height()*40/100;
+
+         if(height<=700){padding_top=$(window).height()*35/100;}
+         if(height<=650){padding_top=$(window).height()*65/100;}
+         if(height<=600){padding_top=$(window).height()*63/100;}
+         if(height<=550){padding_top=$(window).height()*60/100;}
+         if(height<=500){padding_top=$(window).height()*56/100;}
+    	$(document).ready(function(){
+        $(".teks_nav").hide();
+        
+        var teks_muncul=function(){
+          $(".teks_nav").show();
+          TweenLite.from($(".teks_nav"),0.5,{alpha:0,scale:0});
+        }
+        
+        $('#canvas').css('padding-top',padding_top);
+        $('#canvas').css('height',height);
+        var tl=new TimelineLite();
+        var rot=0;
+        var klik=1;
+        var klik_deactived=function(){
+            klik=1;
+        }
+        $("#next").click(function(){
+          if (klik==1){
+            rot+=45;
+            klik=0;
+            if(rot>360){
+              rot=45;tl.fromTo($("#img_planet"),1,{rotation:0},{rotation:rot,ease:Back.easeOut,delay:0.3,onStart:teks_muncul,onComplete:klik_deactived}) 
+            }
+            else{
+              if(rot==180){  
+                tl.to($("#img_planet"),1,{rotation:rot,ease:Back.easeOut,delay:0.3,onStart:teks_muncul,onComplete:klik_deactived})
+              }
+              else{
+                tl.to($("#img_planet"),1,{rotation:rot,ease:Back.easeOut,delay:0.3,onStart:teks_muncul,onComplete:klik_deactived})
+              }
+            }
+          }
+        })
+        });
+      TweenLite.to($(".kotak_cloud"),4,{x:1500,repeat:3});
+      TweenLite.to($(".kotak_cloud2"),4,{x:-1600,repeat:3});
+      TweenLite.to($(".kotak_cloud3"),4,{x:-1600,repeat:3});
+      TweenLite.to($(".kotak_cloud4"),4,{x:1600,repeat:3});
+      TweenLite.to($(".kotak_cloud5"),4,{x:1600,repeat:3});
+      TweenLite.to($(".kotak_cloud6"),4,{x:-1600,repeat:3});
+        
+			//TweenLite.to( $('#test') , 2 , {x:300 , y:200 , rotation:360 ,height: 500 , width :500 ,alpha:0.4,})				
+			//					id	,time(s),style
+    	
+    	</script>
+    </body>
+    </html>
